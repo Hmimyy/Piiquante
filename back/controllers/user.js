@@ -1,17 +1,27 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/User');
+const {isPasswordValid,validatorMessages} = require('../utils/passwordValidator');
+const {isEmailValid} = require('../utils/emailValidator');
+
 
 exports.signup = (req, res, next) => {
+   
+    // Vérification de la validité de l'email    
+    if (!isEmailValid(req.body.email))
+     { return res.status(400).json({message: 'adresse email non valide !'});  }
+    // Vérification de la validité du mot de passe
+     if (!isPasswordValid(req.body.password))
+    { return res.status(400).json({ message: validatorMessages(req.body.password)});  }
+
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            const user = new User({
+            const user = new User({//créer un nouvel utilisateur
             email: req.body.email,
             password: hash
             });
             user.save()
-            .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
+            .then(hash => res.status(201).json({ message: 'Utilisateur créé !' }))
             .catch(error => res.status(400).json({ message: error.message }));
         })
         .catch(error => res.status(500).json({ message: error.message }));
