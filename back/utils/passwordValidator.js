@@ -10,7 +10,7 @@ passwordSchema
 .has().uppercase(1)                  // Doit contenir au moins 1 majuscule
 .has().digits(2)                     // Doit contenir au moins 2 chiffres
 .has().symbols(1)                    // Doit contenir au moins un caractères spécial
-.has().not().spaces()                // Should not have spaces
+.has().not().spaces()                // pas d'espace
 
 
 const isPasswordValid = password => (passwordSchema.validate(password));

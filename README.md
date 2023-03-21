@@ -15,3 +15,9 @@ Les technologies utilisées pour le back: un server NodeJS, une base de données
 
 Démarrer avec node server ou nodemon server.
 
+- Connexion
+
+Ouvrir localhost:4200 dans votre navigateur.
+
+L'utilisateur pour s'inscrire sur l'application doit fournir un email ainsi qu'un mot de passe (entre 8 caractères et 100 caractères, doit contenir au moins un caractère spécial, 1 minuscule, 1 majuscule, 2 chiffres, pas d'espace).
+
